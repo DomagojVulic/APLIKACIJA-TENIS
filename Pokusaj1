@@ -1,0 +1,56 @@
+drop database if exists tenis;
+create database tenis character set utf8mb4 COLLATE utf8mb4_croatian_ci;
+
+use tenis;
+
+	
+	create table turnir (   
+	sifra int not null primary key auto_increment,
+	ime varchar(50),
+	grad varchar(50),
+	vrsta varchar(50),
+	pobjednik int,
+	glavnisponzor int );
+
+	create table igrac( 
+	sifra int not null primary key auto_increment,
+	ime varchar(50) not null,
+	prezime varchar(50) not null,
+	ranking int,
+	visina varchar(50),
+	tezina varchar(50),
+	godiste int(4),
+	prizemoney varchar(50),
+	bestranking int (3)
+	
+
+	);
+	
+	create table pobjednik (  
+	sifra int not null primary key auto_increment,
+	igrac int
+	);
+
+	create table nagrada (
+	sifra int not null primary key auto_increment,
+	runda varchar(5),
+	bodovi int (4),
+	novac varchar (50),
+	turnir int,
+	igrac int
+	);
+
+	create table glavnisponzor (
+	sifra int not null primary key auto_increment,
+	drzava varchar(50),
+	gradsjedista varchar(50)
+	);
+	
+	alter table turnir add foreign key (pobjednik) references pobjednik(sifra);
+	alter table turnir add foreign key (glavnisponzor) references glavnisponzor(sifra);
+
+	alter table nagrada add foreign key (igrac) references igrac(sifra);
+	alter table nagrada add foreign key (turnir) references turnir(sifra);
+	
+	
+	alter table pobjednik add foreign key (igrac) references igrac(sifra);
