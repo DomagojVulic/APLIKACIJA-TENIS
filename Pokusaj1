@@ -26,10 +26,7 @@ use tenis;
 
 	);
 	
-	create table pobjednik (  
-	sifra int not null primary key auto_increment,
-	igrac int
-	);
+	
 
 	create table nagrada (
 	sifra int not null primary key auto_increment,
@@ -46,11 +43,11 @@ use tenis;
 	gradsjedista varchar(50)
 	);
 	
-	alter table turnir add foreign key (pobjednik) references pobjednik(sifra);
+	alter table turnir add foreign key (pobjednik) references igrac(sifra);
 	alter table turnir add foreign key (glavnisponzor) references glavnisponzor(sifra);
 
 	alter table nagrada add foreign key (igrac) references igrac(sifra);
 	alter table nagrada add foreign key (turnir) references turnir(sifra);
 	
 	
-	alter table pobjednik add foreign key (igrac) references igrac(sifra);
+
